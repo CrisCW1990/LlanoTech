@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './services/supabase';
-import { CartProvider } from './context/CartContext';
+import { CartProvider, useCart } from './context/CartContext';
 import Header from './components/Header';
 import HeroCarousel from './components/HeroCarousel';
 import InfoBadges from './components/InfoBadges';
@@ -121,6 +121,7 @@ function AppContent() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const { isCartOpen } = useCart();
 
   useEffect(() => {
     async function loadData() {
@@ -198,15 +199,17 @@ function AppContent() {
       )}
 
       {/* Floating Support WhatsApp Button */}
-      <a
-        href="https://wa.me/573112812020"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-40 bg-[#25d366] hover:bg-[#20ba5a] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-all cursor-pointer"
-        aria-label="Chatear en WhatsApp"
-      >
-        <i className="fab fa-whatsapp"></i>
-      </a>
+      {!isCartOpen && (
+        <a
+          href="https://wa.me/573112812020"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 z-40 bg-[#25d366] hover:bg-[#20ba5a] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-all cursor-pointer"
+          aria-label="Chatear en WhatsApp"
+        >
+          <i className="fab fa-whatsapp"></i>
+        </a>
+      )}
 
       {/* Footer */}
       <Footer />

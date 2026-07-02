@@ -28,11 +28,16 @@ export default function CartDrawer() {
   useEffect(() => {
     if (isCartOpen) {
       document.body.classList.add('overflow-hidden');
+      document.body.classList.add('cart-drawer-open');
       setStep(1); // Reset to step 1 when opening the cart
     } else {
       document.body.classList.remove('overflow-hidden');
+      document.body.classList.remove('cart-drawer-open');
     }
-    return () => document.body.classList.remove('overflow-hidden');
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+      document.body.classList.remove('cart-drawer-open');
+    };
   }, [isCartOpen]);
 
   // Load demo products helper for visualization
@@ -494,7 +499,7 @@ export default function CartDrawer() {
                 /* Step 1 Footer Action */
                 <button
                   onClick={() => setStep(2)}
-                  className="w-full bg-brand-black hover:bg-gray-800 text-white font-black py-4.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2.5 uppercase text-xs tracking-wider cursor-pointer active:scale-[0.99]"
+                  className="w-full bg-brand-black hover:bg-gray-800 text-white font-black py-3.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2.5 uppercase text-xs tracking-wider cursor-pointer active:scale-[0.99]"
                 >
                   <span>Continuar al Envío</span>
                   <i className="fas fa-arrow-right text-[10px]"></i>
@@ -504,14 +509,14 @@ export default function CartDrawer() {
                 <div className="flex gap-3">
                   <button
                     onClick={() => setStep(1)}
-                    className="w-1/3 border border-gray-200 hover:border-gray-300 hover:bg-gray-100/50 text-brand-dark font-black py-4.5 rounded-xl transition-all uppercase text-xs tracking-wider cursor-pointer text-center"
+                    className="w-1/3 border border-gray-200 hover:border-gray-300 hover:bg-gray-100/50 text-brand-dark font-black py-3.5 rounded-xl transition-all uppercase text-xs tracking-wider cursor-pointer text-center"
                   >
                     Volver
                   </button>
                   <button
                     onClick={() => isFormValid && setStep(3)}
                     disabled={!isFormValid}
-                    className="flex-1 bg-brand-black hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 text-white font-black py-4.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2.5 uppercase text-xs tracking-wider cursor-pointer disabled:cursor-not-allowed"
+                    className="flex-1 bg-brand-black hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 text-white font-black py-3.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2.5 uppercase text-xs tracking-wider cursor-pointer disabled:cursor-not-allowed"
                   >
                     <span>Siguiente</span>
                     <i className="fas fa-arrow-right text-[10px]"></i>
@@ -522,16 +527,18 @@ export default function CartDrawer() {
                 <div className="flex gap-3">
                   <button
                     onClick={() => setStep(2)}
-                    className="w-1/3 border border-gray-200 hover:border-gray-300 hover:bg-gray-100/50 text-brand-dark font-black py-4.5 rounded-xl transition-all uppercase text-xs tracking-wider cursor-pointer text-center"
+                    className="w-1/3 border border-gray-200 hover:border-gray-300 hover:bg-gray-100/50 text-brand-dark font-black py-3.5 rounded-xl transition-all uppercase text-xs tracking-wider cursor-pointer text-center"
                   >
                     Volver
                   </button>
                   <button
                     onClick={handleSendOrder}
-                    className="flex-1 bg-[#25d366] hover:bg-[#20ba5a] text-white font-black py-4.5 rounded-xl transition-all shadow-lg hover:shadow-green-500/30 shadow-green-500/25 flex items-center justify-center gap-2.5 uppercase text-xs tracking-wider cursor-pointer hover:scale-[1.01]"
+                    className="flex-1 bg-[#25d366] hover:bg-[#20ba5a] text-white font-black py-3.5 rounded-xl transition-all shadow-lg hover:shadow-green-500/30 shadow-green-500/25 flex items-center justify-center uppercase text-xs tracking-wider cursor-pointer hover:scale-[1.01]"
                   >
-                    <i className="fab fa-whatsapp text-sm"></i>
-                    <span>Enviar por WhatsApp</span>
+                    <span className="!inline-block !w-auto text-center">
+                      <i className="fab fa-whatsapp text-lg align-middle mr-1.5 !static !translate-y-0 !m-0 !inset-auto !inline-block"></i>
+                      Enviar por WhatsApp
+                    </span>
                   </button>
                 </div>
               )}
